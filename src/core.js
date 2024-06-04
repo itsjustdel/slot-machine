@@ -5,7 +5,7 @@ import { symbolStore } from "./reels/symbolStore.js";
 import { ReelManager } from "./reels/reelsManager.js";
 import { timerManager } from "./utils/timermanager.js";
 import { Button } from "./button.js";
-import { Clouds } from "./clouds/clouds.js";
+import { CloudContainer } from "./clouds/cloudContainer.js";
 
 /**
  * Base entry point for the game
@@ -78,6 +78,9 @@ class Core {
 
         const background = PIXI.Sprite.from("background");
         renderer.addChild(background);
+
+        this._clouds = new CloudContainer()
+        renderer.addChild(this._clouds.native)
 
         symbolStore.createSymbols([
             {id: 0, name: "h2"},
