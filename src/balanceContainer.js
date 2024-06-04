@@ -1,16 +1,17 @@
 import * as PIXI from "pixi.js";
 import { renderer } from "./renderer.js";
+import { User } from "./user/user.js";
 
 /**
  * Class to show user's balance
  */
 export class BalanceContainer {
     /**
-     * Constructs a new instance of Player/////////////Balance.
-     * @param {number} [initialBalance=0] - The initial balance of the player, defaults to 0.
+     * Creates a new container to display user balance
+     * @param {User} user reference to user object
      */
-    constructor(initialBalance = 100) {        
-        this.balance = initialBalance;
+    constructor(user) {      
+        this._user = user
         this._create();
     }
 
@@ -18,7 +19,7 @@ export class BalanceContainer {
      * Creates balance panel and text     
      * @private
      */
-    _create() {
+    _create() {        
         this._native = new PIXI.Container();
         this._native.x = 0;
         this._native.y = 0;
@@ -28,7 +29,7 @@ export class BalanceContainer {
 
         
         const fontSize = 12
-        this.balanceText = new PIXI.Text(`Tokens: ${this.balance}`, {
+        this.balanceText = new PIXI.Text(`Tokens: ${this._user.balance}`, {
             fontFamily: "Arial",
             fontSize: fontSize,
             fill: 0xffffff,
@@ -42,6 +43,10 @@ export class BalanceContainer {
 
         this._native.addChild(this.balanceText);
         renderer.addChild(this._native);
+    }
+
+    refreshBalance(){
+        this.balanceText.text = `Tokens: ${this._user.balance}`
     }
 
 }
