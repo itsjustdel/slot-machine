@@ -60,7 +60,7 @@ export class ReelManager extends Base {
         
         this._spinning = false;
         
-        const winningRow = this._checkForWin()
+        this._checkForWin()
     }
 
     /**
@@ -68,17 +68,18 @@ export class ReelManager extends Base {
      * 
      * @returns {number} - The winning row index, or -1 if no win.
      */
-      _checkForWin() {        
-        for (let row = 0; row < this._symbolsPerReel; row++) {            
+      _checkForWin() {
+        for (let row = 1; row < 5; row++) {            
             const symbol1 = this._reels[0]._symbols[row];
             const symbol2 = this._reels[1]._symbols[row];
-            const symbol3 = this._reels[2]._symbols[row];
-                        
-            if (symbol1.id === symbol2.id && symbol2.id === symbol3.id) {            
-                return row;
+            const symbol3 = this._reels[2]._symbols[row];            
+            
+            if (symbol1.id === symbol2.id && symbol2.id === symbol3.id) {                
+                symbol1.play()
+                symbol2.play()
+                symbol3.play()
             }
-        }
-        return -1;
+        }        
     }
 
     /** 
