@@ -59,10 +59,29 @@ export class ReelManager extends Base {
         await Promise.all(this._promises);
         
         this._spinning = false;
+        
+        const winningRow = this._checkForWin()
     }
 
     /**
-     * Create the reelManager using PIXI container and required reel instances
+     * Check for win by looking for horizontal matches in each visible row
+     * 
+     * @returns {number} - The winning row index, or -1 if no win.
+     */
+      _checkForWin() {        
+        for (let row = 0; row < this._symbolsPerReel; row++) {            
+            const symbol1 = this._reels[0]._symbols[row];
+            const symbol2 = this._reels[1]._symbols[row];
+            const symbol3 = this._reels[2]._symbols[row];
+                        
+            if (symbol1.id === symbol2.id && symbol2.id === symbol3.id) {            
+                return row;
+            }
+        }
+        return -1;
+    }
+
+    /** 
      * 
      * @private
      */
