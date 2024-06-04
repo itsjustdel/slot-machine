@@ -26,7 +26,7 @@ class SymbolStore {
         const maxSymbols = reels * rows;
 
         for(let i = 0; i < symbolIds.length; i++) { 
-            const {id, name, value} = symbolIds[i];       
+            const {id, name, value} = symbolIds[i];
             const symbols = [];
             for(let j = 0; j < maxSymbols; j++) {
                 symbols.push(new Symbol(id, name, value))
