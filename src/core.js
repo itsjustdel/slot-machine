@@ -5,6 +5,7 @@ import { symbolStore } from "./reels/symbolStore.js";
 import { ReelManager } from "./reels/reelsManager.js";
 import { timerManager } from "./utils/timermanager.js";
 import { Button } from "./button.js";
+import { Clouds } from "./clouds/clouds.js";
 
 /**
  * Base entry point for the game
