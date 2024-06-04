@@ -40,6 +40,7 @@ export class ReelManager extends Base {
             return;
         }
 
+        this._updateBalance(-1);
         this._spinSound.play()
         this._spinning = true;
         this._reels.forEach(reel => {

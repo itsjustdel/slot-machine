@@ -121,24 +121,46 @@ class Core {
             }
         }
         
-        const handleWinnings = (winnings) => {
+        const handleBalanceChange = (winnings) => {
             if (winnings === 0) return;
             const newBalance = this._user.balance + winnings;
             this._user.updateBalance(newBalance);
             this._balanceContainer.refreshBalance();
+            
+            if (this._user.balance <= 0){
+                button._native.visible = false
+                button._native.interactive = false
+
+                disabled_button._native.visible = true
+                disabled_button._native.interactive = true
+            }
+
         }
-        this._reelManager = new ReelManager(3, 3, 125, 105, handleWinnings);
+        this._reelManager = new ReelManager(3, 3, 125, 105, handleBalanceChange);
 
         renderer.addChild(this._reelManager.native);
 
-        const button = new Button("playActive", async() => {
+        const buttonPosX = 475;
+        const buttonPosY = 440;
+
+        const button = new Button("playActive", async() => {            
             this._reelManager.startSpin();            
             await timerManager.startTimer(2000);
             this._reelManager.stopSpin();    
         });
-        button.x = 475;
-        button.y = 440;
+        button.x = buttonPosX;
+        button.y = buttonPosY;
+
+        const disabled_button = new Button("playNonactive",() => {
+            // play thump sound, pop up to add tokens perhaps
+        });
+        disabled_button.x = buttonPosX;
+        disabled_button.y = buttonPosY;
+        disabled_button._native.visible = false
+        disabled_button._native.interactive = false
+        
         renderer.addChild(button.native);
+        renderer.addChild(disabled_button.native);
 
         this._balanceContainer = new BalanceContainer(this._user)
 
