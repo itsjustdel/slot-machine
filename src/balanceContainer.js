@@ -4,7 +4,7 @@ import { renderer } from "./renderer.js";
 /**
  * Class to show user's balance
  */
-export class Balance {
+export class BalanceContainer {
     /**
      * Constructs a new instance of Player/////////////Balance.
      * @param {number} [initialBalance=0] - The initial balance of the player, defaults to 0.

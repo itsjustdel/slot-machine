@@ -6,7 +6,7 @@ import { ReelManager } from "./reels/reelsManager.js";
 import { timerManager } from "./utils/timermanager.js";
 import { Button } from "./button.js";
 import { CloudContainer } from "./clouds/cloudContainer.js";
-import { Balance } from "./balance.js";
+import { BalanceContainer } from "./balanceContainer.js";
 
 /**
  * Base entry point for the game
@@ -124,7 +124,7 @@ class Core {
         button.y = 440;
         renderer.addChild(button.native);
 
-        this._balance = new Balance()
+        this._balanceContainer = new BalanceContainer()
 
     }
 }
