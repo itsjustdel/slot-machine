@@ -93,15 +93,15 @@ class Core {
         renderer.addChild(this._clouds.native)
 
         symbolStore.createSymbols([
-            {id: 0, name: "h2"},
-            {id: 1, name: "h3"},
-            {id: 2, name: "h4"},
-            {id: 3, name: "ace"},
-            {id: 4, name: "king"},
-            {id: 5, name: "queen"},
-            {id: 6, name: "jack"},
-            {id: 7, name: "ten"},
-            {id: 8, name: "nine"}
+            {id: 0, name: "h2", value: 20},
+            {id: 1, name: "h3", value: 20},
+            {id: 2, name: "h4", value: 20},
+            {id: 3, name: "ace", value: 14},
+            {id: 4, name: "king", value: 13},
+            {id: 5, name: "queen", value: 12},
+            {id: 6, name: "jack", value: 11},
+            {id: 7, name: "ten", value: 10},
+            {id: 8, name: "nine", value: 9},
         ],
         3,
         3);
