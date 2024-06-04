@@ -2,6 +2,7 @@ import * as PIXI from "pixi.js";
 import { Reel } from "./reel.js";
 import { Base } from "../base.js";
 import { timerManager } from "../utils/timermanager.js";
+import {Howl, Howler} from 'howler';
 
 /**
  * Reel manager controls multipler reels 
@@ -24,7 +25,10 @@ export class ReelManager extends Base {
         this._reelWidth = reelWidth;
         this._symbolHeight = symbolHeight;
         this._reels = [];
-        this._updateBalance = updateBalance
+        this._updateBalance = updateBalance;
+        this._spinSound = new Howl({src: ['resource/sounds/spin.wav']});
+        this._winSound = new Howl({src: ['resource/sounds/win.wav']});
+
         this._create();
     }
 
@@ -35,6 +39,8 @@ export class ReelManager extends Base {
         if (this._spinning) {
             return;
         }
+
+        this._spinSound.play()
         this._spinning = true;
         this._reels.forEach(reel => {
             reel.startSpin();
@@ -62,8 +68,11 @@ export class ReelManager extends Base {
         
         this._spinning = false;
         
-        const winnings = this._checkForWin()
-        this._updateBalance(winnings)
+        const winnings = this._checkForWin();        
+        this._updateBalance(winnings);
+
+        if (winnings > 0)
+            this._winSound.play();
     }
 
     /**
@@ -75,18 +84,18 @@ export class ReelManager extends Base {
         for (let row = 1; row < 5; row++) {            
             const symbol1 = this._reels[0]._symbols[row];
             const symbol2 = this._reels[1]._symbols[row];
-            const symbol3 = this._reels[2]._symbols[row];            
+            const symbol3 = this._reels[2]._symbols[row];     
             
             if (symbol1.id === symbol2.id && symbol2.id === symbol3.id) {                
-                symbol1.play()
-                symbol2.play()
-                symbol3.play()
+                symbol1.play();
+                symbol2.play();
+                symbol3.play();
 
-                return symbol1.value + symbol2.value + symbol3.value
+                return symbol1.value + symbol2.value + symbol3.value;
             }
         }       
 
-        return 0
+        return 0;
     }
 
     /** 

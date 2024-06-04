@@ -12,12 +12,22 @@ export class User{
      */
 
     constructor(id, name, balance) {
-        this.id = id
-        this.name = name
-        this.balance = balance
+        this._id = id
+        this._name = name
+        this._balance = balance
+    }
+
+      /**
+     * Get the balance of the user
+     * 
+     * @member
+     * @readonly
+     */
+      get balance() {
+        return this._balance;
     }
 
     updateBalance(value){
-        this.balance = value
+        this._balance = value
     }
 }

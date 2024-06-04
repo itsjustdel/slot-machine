@@ -29,6 +29,16 @@ export class Symbol extends Base {
         return this._id;
     }
 
+      /**
+     * Get the value of the symbol
+     * 
+     * @member
+     * @readonly
+     */
+      get value() {
+        return this._value;
+    }
+
     /**
      * Play the symbol animation
      * 
