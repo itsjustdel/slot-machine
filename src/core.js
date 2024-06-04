@@ -6,6 +6,8 @@ import { ReelManager } from "./reels/reelsManager.js";
 import { timerManager } from "./utils/timermanager.js";
 import { Button } from "./button.js";
 import { CloudContainer } from "./clouds/cloudContainer.js";
+import { BalanceContainer } from "./balanceContainer.js";
+import { User } from "./user/user.js";
 
 /**
  * Base entry point for the game
@@ -58,12 +60,20 @@ class Core {
         });
         renderer.start();
         timerManager.init();
-        await this.loadAssets();
+        await this.loadAssets();        
+        this._createUser();
         this._createObjects(); 
     }
 
     /**
-     * Create all game objecs ready to use
+     * Create a user
+     */
+    _createUser(){
+        this._user = new User(0, "John Smith", 100);
+    }
+
+    /**
+     * Create all game objects ready to use
      * 
      * @async
      * @private
@@ -110,8 +120,15 @@ class Core {
                 symbolBack.y = j * height;
             }
         }
+        
+        const handleWinnings = (winnings) => {
+            if (winnings === 0) return;
+            const newBalance = this._user.balance + winnings;
+            this._user.updateBalance(newBalance);
+            this._balanceContainer.refreshBalance();
+        }
+        this._reelManager = new ReelManager(3, 3, 125, 105, handleWinnings);
 
-        this._reelManager = new ReelManager(3, 3, 125, 105);
         renderer.addChild(this._reelManager.native);
 
         const button = new Button("playActive", async() => {
@@ -122,6 +139,8 @@ class Core {
         button.x = 475;
         button.y = 440;
         renderer.addChild(button.native);
+
+        this._balanceContainer = new BalanceContainer(this._user)
 
     }
 }

@@ -15,14 +15,16 @@ export class ReelManager extends Base {
      * @param {number} symbolsPerReel - number of reels in view for each reel created
      * @param {number} reelWidth - width of each reel to position created reels correctly
      * @param {number} symbolHeight - height of each symbol
+     * @param {(number) => void} updateBalance - callback to update user's balance
      */
-    constructor(numberOfReels, symbolsPerReel, reelWidth, symbolHeight) {
+    constructor(numberOfReels, symbolsPerReel, reelWidth, symbolHeight, updateBalance) {
         super();
         this._numberOfReels = numberOfReels;
         this._symbolsPerReel = symbolsPerReel;
         this._reelWidth = reelWidth;
         this._symbolHeight = symbolHeight;
         this._reels = [];
+        this._updateBalance = updateBalance
         this._create();
     }
 
@@ -60,7 +62,8 @@ export class ReelManager extends Base {
         
         this._spinning = false;
         
-        this._checkForWin()
+        const winnings = this._checkForWin()
+        this._updateBalance(winnings)
     }
 
     /**
@@ -78,8 +81,12 @@ export class ReelManager extends Base {
                 symbol1.play()
                 symbol2.play()
                 symbol3.play()
+
+                return symbol1.value + symbol2.value + symbol3.value
             }
-        }        
+        }       
+
+        return 0
     }
 
     /** 
