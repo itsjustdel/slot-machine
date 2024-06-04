@@ -143,7 +143,9 @@ class Core {
         const buttonPosX = 475;
         const buttonPosY = 440;
 
-        const button = new Button("playActive", async() => {            
+        const button = new Button("playActive", async() => { 
+            if (this._reelManager.spinning) return
+            
             this._reelManager.startSpin();            
             await timerManager.startTimer(2000);
             this._reelManager.stopSpin();    

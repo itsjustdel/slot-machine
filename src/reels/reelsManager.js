@@ -32,6 +32,16 @@ export class ReelManager extends Base {
         this._create();
     }
 
+        /**
+     * Get spinning
+     * 
+     * @member
+     * @readonly
+     */
+        get spinning() {
+            return this._spinning;
+        }
+
     /**
      * Start the reels spinning called when button is clicked
      */
@@ -98,6 +108,7 @@ export class ReelManager extends Base {
 
         return 0;
     }
+    
 
     /** 
      * 
