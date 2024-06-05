@@ -10,7 +10,11 @@ export class BalanceContainer {
      * Creates a new container to display user balance
      * @param {User} user reference to user object
      */
-    constructor(user) {      
+    constructor(user) {
+        if (!user || !(user instanceof User)) {
+            console.error("Invalid user object provided to BalanceContainer. Expected an instance of User.");
+            return;
+        }
         this._user = user
         this._create();
     }
