@@ -79,7 +79,6 @@ class Core {
      * @private
      */
     async _createObjects() {
-
         const graphics = new PIXI.Graphics();
         graphics.beginFill(0x1099bb);
         graphics.drawRect(0, 0, 1024, 300);
@@ -89,8 +88,8 @@ class Core {
         const background = PIXI.Sprite.from("background");
         renderer.addChild(background);
 
-        this._clouds = new CloudContainer()
-        renderer.addChild(this._clouds.native)
+        this._clouds = new CloudContainer();
+        renderer.addChild(this._clouds.native);
 
         symbolStore.createSymbols([
             {id: 0, name: "h2", value: 20},
@@ -121,21 +120,22 @@ class Core {
             }
         }
         
-        const handleBalanceChange = (winnings) => {
-            if (winnings === 0) return;
+        const handleBalanceChange = (winnings) => {            
+            if (winnings === 0) return;        
+            
             const newBalance = this._user.balance + winnings;
             this._user.updateBalance(newBalance);
             this._balanceContainer.refreshBalance();
             
-            if (this._user.balance <= 0){
-                button._native.visible = false
-                button._native.interactive = false
+            if (this._user.balance <= 0) {
+                button._native.visible = false;
+                button._native.interactive = false;
 
-                disabled_button._native.visible = true
-                disabled_button._native.interactive = true
+                disabled_button._native.visible = true;
+                disabled_button._native.interactive = true;
             }
-
         }
+
         this._reelManager = new ReelManager(3, 3, 125, 105, handleBalanceChange);
 
         renderer.addChild(this._reelManager.native);
@@ -150,22 +150,23 @@ class Core {
             await timerManager.startTimer(2000);
             this._reelManager.stopSpin();    
         });
+
         button.x = buttonPosX;
         button.y = buttonPosY;
 
-        const disabled_button = new Button("playNonactive",() => {
+        const disabled_button = new Button("playNonactive", () => {
             // play thump sound, pop up to add tokens perhaps
         });
+
         disabled_button.x = buttonPosX;
         disabled_button.y = buttonPosY;
-        disabled_button._native.visible = false
-        disabled_button._native.interactive = false
+        disabled_button._native.visible = false;
+        disabled_button._native.interactive = false;
         
         renderer.addChild(button.native);
         renderer.addChild(disabled_button.native);
 
-        this._balanceContainer = new BalanceContainer(this._user)
-
+        this._balanceContainer = new BalanceContainer(this._user);
     }
 }
 
