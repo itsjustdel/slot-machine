@@ -24,11 +24,14 @@ export class CloudContainer extends Base {
       
         this._addCloud("cloud1", 0.5)
         this._addCloud("cloud2", 0.4)
+         
+        setTimeout(() => this._addCloud("cloud1", 0.3), 5000);
+        setTimeout(() => this._addCloud("cloud2", 0.2), 6000);
+
 
         renderer.app.ticker.add(() => {
             this._update(renderer.app.ticker.elapsedMS);
         });
-
     }
 
      /**
@@ -36,8 +39,8 @@ export class CloudContainer extends Base {
      * 
      * @private
      */
-    _addCloud(textureAlias, scrollSpeed = 1){
-        const cloud = new Cloud(textureAlias, scrollSpeed)
+    _addCloud(textureAlias, scrollSpeed = 1, x = 0, y = 0){
+        const cloud = new Cloud(textureAlias, scrollSpeed, x, y)        
         this._native.addChild(cloud._native)
         this._clouds.push(cloud)
     }

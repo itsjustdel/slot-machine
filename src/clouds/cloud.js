@@ -40,7 +40,7 @@ export class Cloud extends Base {
      * @param {string} textureAlias - alias of the texture
      * @private
      */
-    _create( textureAlias) {        
+    _create(textureAlias) {        
         this._native = PIXI.Sprite.from(textureAlias);
 
         if (this._native) {
