@@ -8,17 +8,18 @@ import { Base } from "../base.js";
  * @extends Base
  */
 export class Cloud extends Base {
-    /**
-     *      
-     * @param {string} textureAlias - name of the texture
-     * @param {number} [scrollSpeed=1] - speed at which the cloud scrolls
+        /**
+     * Creates an instance of a Cloud.
+     * 
+     * @param {string} textureAlias - The name of the texture.
+     * @param {number} [scrollSpeed=1] - The speed at which the cloud scrolls.
      */
-
     constructor(textureAlias, scrollSpeed = 1) {
         super();
         this.scrollSpeed = scrollSpeed;
         this._create(textureAlias);
     }
+
     
     /**
      * Scroll the cloud          

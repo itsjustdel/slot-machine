@@ -87,9 +87,10 @@ export class ReelManager extends Base {
     }
 
     /**
-     * Check for win by looking for horizontal matches in each visible row
+     * Checks for a win by looking for horizontal matches in each visible row.
      * 
-     * @returns {number} - The winning row index, or -1 if no win.
+     * @returns {number} - The sum of the values of the matching symbols if a win is found, or 0 if no win.
+     * @private
      */
       _checkForWin() {
         for (let row = 1; row < 5; row++) {            
@@ -107,8 +108,7 @@ export class ReelManager extends Base {
         }       
 
         return 0;
-    }
-    
+    }    
 
     /** 
      * 

@@ -5,17 +5,18 @@
  */
 export class User{
     /**
+     * Creates an instance of a User.
      * 
-     * @param {string} id - user id
-     * @param {string} name - user name
-     * @param {int} balance - user currency
+     * @param {string} id - The user ID.
+     * @param {string} name - The user name.
+     * @param {number} balance - The user's currency balance.
      */
-
     constructor(id, name, balance) {
-        this._id = id
-        this._name = name
-        this._balance = balance
+        this._id = id;
+        this._name = name;
+        this._balance = balance;
     }
+
 
       /**
      * Get the balance of the user
@@ -27,7 +28,13 @@ export class User{
         return this._balance;
     }
 
-    updateBalance(value){
-        this._balance = value
+    /**
+     * Updates the balance value.
+     * 
+     * @param {number} value - The new balance value.
+     */
+    updateBalance(value) {
+        this._balance = value;
     }
+
 }
